@@ -7,18 +7,20 @@ get '/' do
 end
 
 get '/128' do
+  @view = '128'
   @url = "http://icecast.media.berkeley.edu:8000/kalx-128.mp3.m3u"
   erb :play
 end
 
 get '/56' do
+  @view = '56'
   @url = "http://icecast.media.berkeley.edu:8000/kalx-56.mp3.m3u"
   erb :play
 end
 
 get '/playlist' do
-  @url = "http://kalx.berkeley.edu/last24hours.php"
-  erb :play
+  @view = 'playlist'
+  erb :playlist
 end
 
 __END__
@@ -28,7 +30,7 @@ __END__
   <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
   <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
-    <% if @view != "index" %>
+    <% if @view == "128" || @view == '56' %>
       <meta http-equiv="refresh" content="0; url=<%= @url %>">
     <% end %>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -48,9 +50,9 @@ __END__
         font-family:arial, sans-serif;
         padding:9px;
       }
-      ul, li {
-  			margin: 0;
-  			padding: 0;
+      h1, h2, h3, p, li, ul {
+        margin:0;
+        padding:0;
       }
       li {
         margin-bottom:9px;
@@ -71,31 +73,53 @@ __END__
       }
       h1 {
         font-size:100px;
-        margin:0;
-        padding:0;
         margin-bottom:9px;
         color:#333
       }
       h2 {
         font-size:36px;
         color:#555;
-        margin:0;
-        padding:0;
         text-transform:uppercase;
       }
       p {
-        font-size:18px;
+        font-size:14px;
         color:#555;
         margin:0;
         padding:0;
       }
-      p a {
+      a {
         color:#555;
         text-decoration:none;
       }
-      p a:hover {
+      a:hover {
         color:#777;
         text-decoration:underline;
+      }
+      .track {
+        background-color:#333;
+        text-align:left;
+        padding:9px;
+        margin-bottom:9px;
+      }
+      .track h3 {
+        color:#fff;
+        padding-bottom:4px;
+      }
+      .track p {
+        color:#999;
+      }
+      .track p strong {
+        color:#777;
+        display:inline-block;
+        width:60px;
+      }
+      .track .created_at {
+        font-size:13px;
+        text-transform:uppercase;
+        padding-top:4px;
+      }
+      .odd {
+        background-color:#303030
       }
     </style>
   </head>
@@ -121,3 +145,20 @@ __END__
 @@ play
   <h2>Now Playing</h2>
   <p><a href="<%= @url %>"><%= @url %></a></p>
+  
+@@ playlist
+  <h2><a href="http://kalx.berkeley.edu/last24hours.php">Last 24 Hours</a></h2>
+  <div class="track odd">
+    <h3>"title"</h3>
+    <p><strong>Artist:</strong> artist<p>
+    <p><strong>Album:</strong> album<p>
+    <p><strong>Label:</strong> label<p>
+    <p class="created_at">2:39pm 2010.07.01</p>
+  </div>
+  <div class="track even">
+    <h3>"title"</h3>
+    <p><strong>Artist:</strong> artist<p>
+    <p><strong>Album:</strong> album<p>
+    <p><strong>Label:</strong> label<p>
+    <p class="created_at">2:34pm 2010.07.01</p>
+  </div>
