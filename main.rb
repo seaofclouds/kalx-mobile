@@ -88,7 +88,7 @@ __END__
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="Content-Language" content="en-us" />
-    <meta http-equiv="refresh" content="60; url=<%= @url %>">
+    <meta http-equiv="refresh" content="0; url=<%= @url %>">
     <title>KALX Mobile</title>
     <style type="text/css">
       body {
