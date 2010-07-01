@@ -4,8 +4,6 @@ require 'nokogiri'
 require 'sequel'
 
 DB = Sequel.connect(ENV['DATABASE_URL'] || 'sqlite://kalx.db')
-
-DB.drop_table :playlist
 DB.create_table :playlist do
   primary_key :id
   String      :artist
