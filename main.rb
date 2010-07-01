@@ -25,7 +25,7 @@ end
 
 get '/playlist' do
   @view = 'playlist'
-  @songs = DB[:playlist].order(:created_at).limit(10)
+  @songs = DB[:playlist].order(:played_at).limit(10)
   erb :playlist
 end
 
