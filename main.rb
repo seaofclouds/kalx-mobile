@@ -59,7 +59,7 @@ __END__
         color:#fff
       }
       h1 {
-        font-size:128px;
+        font-size:100px;
         margin:0;
         padding:0;
         margin-bottom:9px;
