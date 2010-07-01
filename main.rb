@@ -118,6 +118,9 @@ __END__
       .odd {
         background-color:#393939
       }
+      audio {
+        margin-top:36px;
+      }
     </style>
   </head>
   <body>
@@ -141,7 +144,7 @@ __END__
 
 @@ play
   <h2>Now Playing</h2>
-  <audio src="<%= @url %>" controls>
+  <audio src="<%= @url %>" autoplay controls>
       <a href="<%= @url %>">Download song</a>
   </audio>
   
