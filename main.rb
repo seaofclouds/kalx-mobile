@@ -24,7 +24,8 @@ __END__
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="Content-Language" content="en-us" />
     <meta name = "viewport" content = "user-scalable=no, width=device-width">
-    <title>KALX Mobile</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />    <title>KALX Mobile</title>
     <style type="text/css">
   		html, body {
   			height: 100%;
@@ -77,7 +78,7 @@ __END__
         <a href="http://icecast.media.berkeley.edu:8000/kalx-56.mp3.m3u">56k</a>
       </li>
       <li>
-        <a href="http://kalx.berkeley.edu/last24hours.php">Last 24 Hours</a>
+        <a href="http://kalx.berkeley.edu/last24hours.php">Playlist</a>
       </li>
     </ul>
   </body>
@@ -91,6 +92,8 @@ __END__
     <meta http-equiv="Content-Language" content="en-us" />
     <meta http-equiv="refresh" content="0; url=<%= @url %>">
     <meta name = "viewport" content = "user-scalable=no, width=device-width">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <title>KALX Mobile</title>
     <style type="text/css">
       body {
