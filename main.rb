@@ -96,7 +96,7 @@ __END__
         text-decoration:underline;
       }
       .track {
-        background-color:#333;
+        background-color:#303030;
         text-align:left;
         padding:9px;
         margin-bottom:9px;
@@ -119,7 +119,7 @@ __END__
         padding-top:4px;
       }
       .odd {
-        background-color:#303030
+        background-color:#393939
       }
     </style>
   </head>
