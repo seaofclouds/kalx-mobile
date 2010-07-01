@@ -76,15 +76,36 @@ __END__
         margin-bottom:9px;
         color:#333
       }
+      h2 {
+        font-size:36px;
+        color:#555;
+        margin:0;
+        padding:0;
+        text-transform:uppercase;
+      }
+      p {
+        font-size:18px;
+        color:#555;
+        margin:0;
+        padding:0;
+      }
+      p a {
+        color:#555;
+        text-decoration:none;
+      }
+      p a:hover {
+        color:#777;
+        text-decoration:underline;
+      }
     </style>
   </head>
   <body>
+    <h1>KALX</h1>
     <%= yield %>
   </body>
   </html>
 
 @@ index
-  <h1>KALX</h1>
   <ul>
     <li>
       <a href="/128">128k</a>
@@ -98,3 +119,5 @@ __END__
   </ul>
 
 @@ play
+  <h2>Now Playing</h2>
+  <p><a href="<%= @url %>"><%= @url %></a></p>
