@@ -96,7 +96,9 @@ __END__
       }
       a:hover {
         color:#777;
-        text-decoration:underline;
+      }
+      h1 a {
+        color:#444
       }
       .track {
         background-color:#303030;
@@ -130,7 +132,7 @@ __END__
     </style>
   </head>
   <body>
-    <h1>KALX</h1>
+    <h1><a href="/">KALX</a></h1>
     <%= yield %>
   </body>
   </html>
@@ -147,12 +149,14 @@ __END__
       <a href="/playlist">Playlist</a>
     </li>
   </ul>
-
+  <p>
+    <a href="http://kalx.berkeley.edu/">kalx.berkeley.edu</a>
+  </p>
 @@ play
-  <h2>Now Playing</h2>
   <audio src="<%= @url %>" autoplay controls>
-      <a href="<%= @url %>">Download song</a>
+      <a href="<%= @url %>">Download Stream</a>
   </audio>
+  <p><a href="<%= @url %>">Download Stream</a></p>
   
 @@ playlist
   <h2><a href="http://kalx.berkeley.edu/last24hours.php">Last 24 Hours</a></h2>
