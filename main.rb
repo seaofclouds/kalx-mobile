@@ -30,9 +30,6 @@ __END__
   <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
   <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
-    <% if @view == "128" || @view == '56' %>
-      <meta http-equiv="refresh" content="0; url=<%= @url %>">
-    <% end %>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="Content-Language" content="en-us" />
     <meta name = "viewport" content = "user-scalable=no, width=device-width">
@@ -144,7 +141,9 @@ __END__
 
 @@ play
   <h2>Now Playing</h2>
-  <p><a href="<%= @url %>"><%= @url %></a></p>
+  <audio src="<%= @url %>" controls>
+      <a href="<%= @url %>">Download song</a>
+  </audio>
   
 @@ playlist
   <h2><a href="http://kalx.berkeley.edu/last24hours.php">Last 24 Hours</a></h2>
