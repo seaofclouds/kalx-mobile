@@ -1,5 +1,10 @@
 require 'rubygems'
 require 'sinatra'
+require 'sequel'
+
+configure do
+  DB = Sequel.connect(ENV['DATABASE_URL'] || 'sqlite://kalx.db')
+end
 
 get '/' do
   @view = "index"
@@ -20,6 +25,7 @@ end
 
 get '/playlist' do
   @view = 'playlist'
+  @songs = DB[:playlist].order(:created_at).limit(10)
   erb :playlist
 end
 
@@ -150,17 +156,12 @@ __END__
   
 @@ playlist
   <h2><a href="http://kalx.berkeley.edu/last24hours.php">Last 24 Hours</a></h2>
-  <div class="track odd">
-    <h3>"title"</h3>
-    <p><strong>Artist:</strong> artist<p>
-    <p><strong>Album:</strong> album<p>
-    <p><strong>Label:</strong> label<p>
-    <p class="created_at">2:39pm 2010.07.01</p>
-  </div>
-  <div class="track even">
-    <h3>"title"</h3>
-    <p><strong>Artist:</strong> artist<p>
-    <p><strong>Album:</strong> album<p>
-    <p><strong>Label:</strong> label<p>
-    <p class="created_at">2:34pm 2010.07.01</p>
-  </div>
+  <% @songs.each do |song| %>
+    <div class="track odd">
+      <h3><%= song[:title] %></h3>
+      <p><strong>Artist:</strong> <%= song[:artist] %><p>
+      <p><strong>Album:</strong> <%= song[:album] %><p>
+      <p><strong>Label:</strong> <%= song[:label] %><p>
+      <p class="created_at"><%= song[:played_at] %></p>
+    </div>
+  <% end %>
