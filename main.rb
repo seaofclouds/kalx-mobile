@@ -8,6 +8,7 @@ end
 
 get '/' do
   @view = "index"
+  @songs = DB[:playlist].reverse_order(:played_at).limit(1)
   erb :index
 end
 
@@ -19,10 +20,14 @@ get '/56' do
   redirect "http://icecast.media.berkeley.edu:8000/kalx-56.mp3.m3u"
 end
 
-get '/playlist' do
+get '/playlist/:limit' do
   @view = 'playlist'
-  @songs = DB[:playlist].reverse_order(:played_at).limit(10)
+  @songs = DB[:playlist].reverse_order(:played_at).limit(params[:limit])
   erb :playlist
+end
+
+get '/playlist' do
+  redirect "/playlist/10"
 end
 
 __END__
@@ -142,15 +147,24 @@ __END__
       <a href="/56">56k</a>
     </li>
     <li>
-      <a href="/playlist">Playlist</a>
+      <a href="/playlist">Last 10 Tracks</a>
     </li>
   </ul>
+  <% @songs.each do |song| %>
+    <div class="track odd">
+      <h3><%= song[:title] %></h3>
+      <p><strong>Artist:</strong> <%= song[:artist] %><p>
+      <p><strong>Album:</strong> <%= song[:album] %><p>
+      <p><strong>Label:</strong> <%= song[:label] %><p>
+      <p class="created_at"><%= song[:played_at].strftime("%I:%M%p on %Y.%m.%d") %></p>
+    </div>
+  <% end %>
   <p>
     <a href="http://kalx.berkeley.edu/">kalx.berkeley.edu</a>
   </p>
   
 @@ playlist
-  <h2><a href="http://kalx.berkeley.edu/last24hours.php">Last 10 Tracks</a></h2>
+  <h2>Last <%= params[:limit] %> Tracks</h2>
   <% @songs.each do |song| %>
     <div class="track odd">
       <h3><%= song[:title] %></h3>
