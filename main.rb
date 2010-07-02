@@ -143,13 +143,21 @@ __END__
 
 @@ index
   <% @songs.each do |song| %>
-    <div class="track odd">
-      <h3><%= song[:title] %></h3>
-      <p><strong>Artist:</strong> <%= song[:artist] %><p>
-      <p><strong>Album:</strong> <%= song[:album] %><p>
-      <p><strong>Label:</strong> <%= song[:label] %><p>
-      <p class="created_at"><%= song[:played_at].strftime("%I:%M%p on %Y.%m.%d") %></p>
-    </div>
+    <% if song[:title] == 'mic Break' %>
+      <div class="track micbreak">
+        <h3><%= song[:title] %></h3>
+        <p><%= song[:artist] %></p>
+        <p class="created_at"><strong><%= song[:played_at].strftime("%I:%M%p") %></strong> on <%= song[:played_at].strftime("%Y.%m.%d") %></p>
+      </div>
+    <% else %>
+      <div class="track odd">
+        <h3><%= song[:title] %></h3>
+        <p><strong>Artist:</strong> <%= song[:artist] %></p>
+        <p><strong>Album:</strong> <%= song[:album] %></p>
+        <p><strong>Label:</strong> <%= song[:label] %></p>
+        <p class="created_at"><%= song[:played_at].strftime("%I:%M%p on %Y.%m.%d") %></p>
+      </div>
+    <% end %>
   <% end %>
   <ul>
     <li>
@@ -169,13 +177,21 @@ __END__
 @@ playlist
   <h2>Last <%= params[:limit] %> Tracks</h2>
   <% @songs.each do |song| %>
-    <div class="track">
-      <h3><%= song[:title] %></h3>
-      <p><strong>Artist:</strong> <%= song[:artist] %><p>
-      <p><strong>Album:</strong> <%= song[:album] %><p>
-      <p><strong>Label:</strong> <%= song[:label] %><p>
-      <p class="created_at"><%= song[:played_at].strftime("%I:%M%p on %Y.%m.%d") %></p>
-    </div>
+    <% if song[:title] == 'mic Break' %>
+      <div class="track micbreak">
+        <h3><%= song[:title] %></h3>
+        <p><%= song[:artist] %></p>
+        <p class="created_at"><strong><%= song[:played_at].strftime("%I:%M%p") %></strong> on <%= song[:played_at].strftime("%Y.%m.%d") %></p>
+      </div>
+    <% else %>
+      <div class="track odd">
+        <h3><%= song[:title] %></h3>
+        <p><strong>Artist:</strong> <%= song[:artist] %></p>
+        <p><strong>Album:</strong> <%= song[:album] %></p>
+        <p><strong>Label:</strong> <%= song[:label] %></p>
+        <p class="created_at"><%= song[:played_at].strftime("%I:%M%p on %Y.%m.%d") %></p>
+      </div>
+    <% end %>
   <% end %>
   <p><small>Cached every 10 min</small></p>
   <p>&nbsp;</p>
