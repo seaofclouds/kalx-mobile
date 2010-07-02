@@ -120,7 +120,6 @@ __END__
       }
       .track .created_at {
         font-size:13px;
-        text-transform:uppercase;
         padding-top:4px;
       }
       .odd {
@@ -159,13 +158,13 @@ __END__
   <p><a href="<%= @url %>">Download Stream</a></p>
   
 @@ playlist
-  <h2><a href="http://kalx.berkeley.edu/last24hours.php">Last 24 Hours</a></h2>
+  <h2><a href="http://kalx.berkeley.edu/last24hours.php">Last 10 Tracks</a></h2>
   <% @songs.each do |song| %>
     <div class="track odd">
       <h3><%= song[:title] %></h3>
       <p><strong>Artist:</strong> <%= song[:artist] %><p>
       <p><strong>Album:</strong> <%= song[:album] %><p>
       <p><strong>Label:</strong> <%= song[:label] %><p>
-      <p class="created_at"><%= song[:played_at] %></p>
+      <p class="created_at"><%= song[:played_at].strftime("%I:%M%p on %Y.%m.%d") %></p>
     </div>
   <% end %>
