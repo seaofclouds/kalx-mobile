@@ -162,6 +162,9 @@ __END__
   <body>
     <h1><a href="/">KALX</a></h1>
     <%= yield %>
+    <p>
+      <a href="http://kalx.berkeley.edu/">berkeley kalx</a> | <a href="http://heroku.com">deployed to heroku</a> | <a href="http://github.com/seaofclouds/kalx-mobile">code on github</a> | by <a href="http://noah.heroku.com">noah</a> and <a href="http://seaofclouds.com">seaofclouds</a>
+    </p>
   </body>
   </html>
 
@@ -197,9 +200,6 @@ __END__
       <a href="/56"><span>Play</span> 56k</a>
     </li>
   </ul>
-  <p>
-    <a href="http://kalx.berkeley.edu/">kalx.berkeley.edu</a>
-  </p>
   
 @@ playlist
   <h2>Recent <%= params[:limit] %> Tracks</h2>
