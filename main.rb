@@ -169,7 +169,7 @@ __END__
 @@ playlist
   <h2>Last <%= params[:limit] %> Tracks</h2>
   <% @songs.each do |song| %>
-    <div class="track odd">
+    <div class="track">
       <h3><%= song[:title] %></h3>
       <p><strong>Artist:</strong> <%= song[:artist] %><p>
       <p><strong>Album:</strong> <%= song[:album] %><p>
@@ -177,3 +177,5 @@ __END__
       <p class="created_at"><%= song[:played_at].strftime("%I:%M%p on %Y.%m.%d") %></p>
     </div>
   <% end %>
+  <p><small>Cached every 10 min</small></p>
+  <p>&nbsp;</p>
