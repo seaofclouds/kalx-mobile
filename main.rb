@@ -195,6 +195,18 @@ __END__
   </html>
 
 @@ index
+  <% if @view == "56" || @view == "128" %>
+    <div class="play">
+      <a href="/<%= @view %>"><%= @view %>k</a>
+      <audio controls />
+      <script type="text/javascript">
+        var audio = document.getElementsByTagName('audio')[0];
+        audio.src = "<%= @url %>";
+        audio.load();
+        audio.play();
+      </script>
+    </div>
+  <% end %>
   <div id="latest">
     <% @songs.each do |song| %>
       <% if song[:title] == 'mic Break' %>
@@ -217,19 +229,7 @@ __END__
       Recent <a href="/playlist/10">10</a> <a href="/playlist/20">20</a> <a href="/playlist/100">100</a> Tracks
     </p>
   </div>
-  
-  <% if @view == "56" || @view == "128" %>
-    <div class="play">
-      <a href="/<%= @view %>"><%= @view %>k</a>
-      <audio controls />
-      <script type="text/javascript">
-        var audio = document.getElementsByTagName('audio')[0];
-        audio.src = "<%= @url %>";
-        audio.load();
-        audio.play();
-      </script>
-    </div>
-  <% else %>
+  <% unless @view == "56" || @view == "128" %>
     <ul>
       <li class="bitrate">
         <a href="/128"><span>Play</span> 128k</a>
