@@ -51,7 +51,7 @@ __END__
         text-align:center;
         background-color:#1a1a1a;
         font-family:arial, sans-serif;
-        padding:9px;
+        padding:9px 9px 36px 9px;
       }
       h1, h2, h3, p, li, ul {
         margin:0;
@@ -75,7 +75,7 @@ __END__
         color:#fff
       }
       h1 {
-        font-size:100px;
+        font-size:117px;
         margin-bottom:9px;
         color:#333
       }
@@ -83,6 +83,7 @@ __END__
         font-size:36px;
         color:#555;
         text-transform:uppercase;
+        padding-bottom:18px;
       }
       p {
         font-size:14px;
