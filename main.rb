@@ -54,7 +54,7 @@ __END__
         text-align:center;
         background-color:#1a1a1a;
         font-family:arial, sans-serif;
-        padding:9px 9px 36px 9px;
+        padding:9px;
       }
       h1, h2, h3, p, li, ul {
         margin:0;
@@ -163,12 +163,15 @@ __END__
         color:#fff;
         background-color:#555
       }
+      p#footer {
+        margin-bottom:36px;
+      }
     </style>
   </head>
   <body>
     <h1><a href="/">KALX</a></h1>
     <%= yield %>
-    <p>
+    <p id="footer">
       <a href="http://kalx.berkeley.edu/">berkeley kalx</a> | <a href="http://heroku.com">deployed to heroku</a> | <a href="http://github.com/seaofclouds/kalx-mobile">code on github</a> | by <a href="http://noah.heroku.com">noah</a> and <a href="http://seaofclouds.com">seaofclouds</a>
     </p>
   </body>
@@ -227,4 +230,3 @@ __END__
     <% end %>
   <% end %>
   <p><small>Cached every 10min</small></p>
-  <p>&nbsp;</p>
