@@ -12,15 +12,11 @@ get '/' do
 end
 
 get '/128' do
-  @view = '128'
-  @url = "http://icecast.media.berkeley.edu:8000/kalx-128.mp3.m3u"
-  erb :play
+  redirect "http://icecast.media.berkeley.edu:8000/kalx-128.mp3.m3u"
 end
 
 get '/56' do
-  @view = '56'
-  @url = "http://icecast.media.berkeley.edu:8000/kalx-56.mp3.m3u"
-  erb :play
+  redirect "http://icecast.media.berkeley.edu:8000/kalx-56.mp3.m3u"
 end
 
 get '/playlist' do
@@ -152,11 +148,6 @@ __END__
   <p>
     <a href="http://kalx.berkeley.edu/">kalx.berkeley.edu</a>
   </p>
-@@ play
-  <audio src="<%= @url %>" autoplay controls>
-      <a href="<%= @url %>">Download Stream</a>
-  </audio>
-  <p><a href="<%= @url %>">Download Stream</a></p>
   
 @@ playlist
   <h2><a href="http://kalx.berkeley.edu/last24hours.php">Last 10 Tracks</a></h2>
