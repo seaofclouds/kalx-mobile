@@ -42,7 +42,8 @@ __END__
     <meta http-equiv="Content-Language" content="en-us" />
     <meta name = "viewport" content = "user-scalable=no, width=device-width">
     <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black" />    <title>KALX Mobile</title>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />   
+    <link rel="apple-touch-icon" href="/icon-touch.png" /> <title>KALX Mobile</title>
     <style type="text/css">
   		html, body {
   			height: 100%;
