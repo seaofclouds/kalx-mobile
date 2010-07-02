@@ -1,7 +1,6 @@
 require 'rubygems'
 require 'sinatra'
 require 'sequel'
-require 'uri'
 
 configure do
   DB = Sequel.connect(ENV['DATABASE_URL'] || 'sqlite://kalx.db')
@@ -13,12 +12,16 @@ get '/' do
   erb :index
 end
 
-get '/128' do
-  redirect "http://icecast.media.berkeley.edu:8000/kalx-128.mp3.m3u"
+get '/:bitrate' do
+  @view = params[:bitrate]
+  @url = "http://icecast.media.berkeley.edu:8000/kalx-#{params[:bitrate]}.mp3.m3u"
+  @songs = DB[:playlist].reverse_order(:played_at).limit(1)
+  erb :index
+  
 end
 
-get '/56' do
-  redirect "http://icecast.media.berkeley.edu:8000/kalx-56.mp3.m3u"
+get '/:bitrate/play' do
+  redirect "http://icecast.media.berkeley.edu:8000/kalx-#{params[:bitrate]}.mp3.m3u"
 end
 
 get '/playlist/:limit' do
@@ -115,7 +118,7 @@ __END__
       .micbreak {
         opacity:.5
       }
-      .track {
+      .track, .play {
         background-color:#303030;
         text-align:left;
         padding:9px;
@@ -137,11 +140,22 @@ __END__
         padding-top:4px;
         color:#777
       }
+      .play {
+        text-align:center;
+      }
+      .play a {
+        color:#aaa;
+        font-size:16px;
+        line-height:30px;
+        font-weight:bold;
+        display:inline-block;
+      }
+      .play audio {
+        display:inline-block;
+        margin-bottom:-4px;
+      }
       .odd {
         background-color:#393939
-      }
-      audio {
-        margin-top:36px;
       }
       #latest {
         margin-bottom:9px;
@@ -152,7 +166,6 @@ __END__
       p.tracklist {
         background-color:#292929;
         font-size:16px;
-        font-weight:bold;
       }
       p.tracklist a {
         display:inline-block;
@@ -204,15 +217,28 @@ __END__
       Recent <a href="/playlist/10">10</a> <a href="/playlist/20">20</a> <a href="/playlist/100">100</a> Tracks
     </p>
   </div>
-
-  <ul>
-    <li class="bitrate">
-      <a href="/128"><span>Play</span> 128k</a>
-    </li>
-    <li class="bitrate">
-      <a href="/56"><span>Play</span> 56k</a>
-    </li>
-  </ul>
+  
+  <% if @view == "56" || @view == "128" %>
+    <div class="play">
+      <a href="/<%= @view %>"><%= @view %>k</a>
+      <audio controls />
+      <script type="text/javascript">
+        var audio = document.getElementsByTagName('audio')[0];
+        audio.src = "<%= @url %>";
+        audio.load();
+        audio.play();
+      </script>
+    </div>
+  <% else %>
+    <ul>
+      <li class="bitrate">
+        <a href="/128"><span>Play</span> 128k</a>
+      </li>
+      <li class="bitrate">
+        <a href="/56"><span>Play</span> 56k</a>
+      </li>
+    </ul>
+  <% end %>
   
 @@ playlist
   <h2>Recent <%= params[:limit] %> Tracks</h2>
