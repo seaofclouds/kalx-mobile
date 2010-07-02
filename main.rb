@@ -58,33 +58,37 @@ __END__
         margin:0;
         padding:0;
       }
+
       li {
         margin-bottom:9px;
         list-style-type:none;
+        background-color:#444;
+        font-weight:bold;
+        color:#aaa;
+        font-size:24px;
       }
-      li a {
+      li.bitrate a {
         display:block;
         background-color:#444;
         color:#eee;
-        font-weight:bold;
-        font-size:24px;
         padding:9px;
         text-decoration:none;
       }
-      li a span {
+      li.bitrate a span {
         color:#aaa
       }
-      li a:hover {
+      li.bitrate a:hover {
         background-color:#555;
         color:#fff
       }
       h1 {
         font-size:108px;
-        margin-bottom:9px;
+        margin: 0; padding: 0;
+        line-height:108px;
         color:#333
       }
       h2 {
-        font-size:32px;
+        font-size:26px;
         color:#555;
         text-transform:uppercase;
         padding-bottom:18px;
@@ -133,6 +137,26 @@ __END__
       audio {
         margin-top:36px;
       }
+      #latest {
+        margin-bottom:9px;
+      }
+      #latest .track {
+        margin-bottom:0;
+      }
+      p.tracklist {
+        background-color:#292929;
+        font-size:16px;
+        font-weight:bold;
+      }
+      p.tracklist a {
+        display:inline-block;
+        padding:9px;
+        color:#eee;
+      }
+      p.tracklist a:hover {
+        color:#fff;
+        background-color:#555
+      }
     </style>
   </head>
   <body>
@@ -142,31 +166,34 @@ __END__
   </html>
 
 @@ index
-  <% @songs.each do |song| %>
-    <% if song[:title] == 'mic Break' %>
-      <div class="track micbreak">
-        <h3><%= song[:title] %></h3>
-        <p><%= song[:artist] %></p>
-        <p class="created_at"><strong><%= song[:played_at].strftime("%I:%M%p") %></strong> on <%= song[:played_at].strftime("%Y.%m.%d") %></p>
-      </div>
-    <% else %>
-      <div class="track odd">
-        <h3><%= song[:title] %></h3>
-        <p><strong>Artist:</strong> <%= song[:artist] %></p>
-        <p><strong>Album:</strong> <%= song[:album] %></p>
-        <p><strong>Label:</strong> <%= song[:label] %></p>
-        <p class="created_at"><%= song[:played_at].strftime("%I:%M%p on %Y.%m.%d") %></p>
-      </div>
+  <div id="latest">
+    <% @songs.each do |song| %>
+      <% if song[:title] == 'mic Break' %>
+        <div class="track micbreak">
+          <h3><%= song[:title] %></h3>
+          <p><%= song[:artist] %></p>
+          <p class="created_at"><strong><%= song[:played_at].strftime("%I:%M%p") %></strong> on <%= song[:played_at].strftime("%Y.%m.%d") %></p>
+        </div>
+      <% else %>
+        <div class="track">
+          <h3><%= song[:title] %></h3>
+          <p><strong>Artist:</strong> <%= song[:artist] %></p>
+          <p><strong>Album:</strong> <%= song[:album] %></p>
+          <p><strong>Label:</strong> <%= song[:label] %></p>
+          <p class="created_at"><%= song[:played_at].strftime("%I:%M%p on %Y.%m.%d") %></p>
+        </div>
+      <% end %>
     <% end %>
-  <% end %>
+    <p class="tracklist">
+      Recent <a href="/playlist/10">10</a> <a href="/playlist/20">20</a> <a href="/playlist/100">100</a> Tracks
+    </p>
+  </div>
+
   <ul>
-    <li>
-      <a href="/playlist">Last 10 Tracks</a>
-    </li>
-    <li>
+    <li class="bitrate">
       <a href="/128"><span>Play</span> 128k</a>
     </li>
-    <li>
+    <li class="bitrate">
       <a href="/56"><span>Play</span> 56k</a>
     </li>
   </ul>
@@ -175,7 +202,7 @@ __END__
   </p>
   
 @@ playlist
-  <h2>Last <%= params[:limit] %> Tracks</h2>
+  <h2>Recent <%= params[:limit] %> Tracks</h2>
   <% @songs.each do |song| %>
     <% if song[:title] == 'mic Break' %>
       <div class="track micbreak">
