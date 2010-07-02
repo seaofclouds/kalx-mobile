@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'sinatra'
 require 'sequel'
+require 'uri'
 
 configure do
   DB = Sequel.connect(ENV['DATABASE_URL'] || 'sqlite://kalx.db')
@@ -98,6 +99,7 @@ __END__
         color:#555;
         margin:0;
         padding:0;
+        font-weight:normal;
       }
       a {
         color:#555;
@@ -109,17 +111,20 @@ __END__
       h1 a {
         color:#444
       }
+      .micbreak {
+        opacity:.5
+      }
       .track {
         background-color:#303030;
         text-align:left;
         padding:9px;
         margin-bottom:9px;
       }
-      .track h3 {
+      .track h3, .track h3 a {
         color:#fff;
         padding-bottom:4px;
       }
-      .track p {
+      .track p, .track p a {
         color:#999;
       }
       .track p strong {
@@ -128,8 +133,8 @@ __END__
         width:60px;
       }
       .track .created_at {
-        font-size:13px;
         padding-top:4px;
+        color:#777
       }
       .odd {
         background-color:#393939
@@ -220,5 +225,5 @@ __END__
       </div>
     <% end %>
   <% end %>
-  <p><small>Cached every 10 min</small></p>
+  <p><small>Cached every 10min</small></p>
   <p>&nbsp;</p>
