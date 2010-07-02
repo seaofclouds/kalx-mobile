@@ -54,7 +54,7 @@ __END__
         text-align:center;
         background-color:#1a1a1a;
         font-family:arial, sans-serif;
-        padding:9px;
+        padding:9px 9px 36px 9px;
       }
       h1, h2, h3, p, li, ul {
         margin:0;
@@ -164,7 +164,11 @@ __END__
         background-color:#555
       }
       p#footer {
-        margin-bottom:36px;
+        padding-top:18px;
+        padding-bottom:36px;
+      }
+      p#footer a {
+        color:#777
       }
     </style>
   </head>
@@ -172,7 +176,7 @@ __END__
     <h1><a href="/">KALX</a></h1>
     <%= yield %>
     <p id="footer">
-      <a href="http://kalx.berkeley.edu/">berkeley kalx</a> | <a href="http://heroku.com">deployed to heroku</a> | <a href="http://github.com/seaofclouds/kalx-mobile">code on github</a> | by <a href="http://noah.heroku.com">noah</a> and <a href="http://seaofclouds.com">seaofclouds</a>
+      by <a href="http://noah.heroku.com">noah</a> and <a href="http://seaofclouds.com">seaofclouds</a> | powered with <a href="http://kalx.berkeley.edu/">kalx</a>, <a href="http://heroku.com">heroku</a>, and <a href="http://github.com/seaofclouds/kalx-mobile">github</a>
     </p>
   </body>
   </html>
