@@ -71,6 +71,9 @@ __END__
         padding:9px;
         text-decoration:none;
       }
+      li a span {
+        color:#aaa
+      }
       li a:hover {
         background-color:#555;
         color:#fff
@@ -139,17 +142,6 @@ __END__
   </html>
 
 @@ index
-  <ul>
-    <li>
-      <a href="/128">128k</a>
-    </li>
-    <li>
-      <a href="/56">56k</a>
-    </li>
-    <li>
-      <a href="/playlist">Last 10 Tracks</a>
-    </li>
-  </ul>
   <% @songs.each do |song| %>
     <div class="track odd">
       <h3><%= song[:title] %></h3>
@@ -159,6 +151,17 @@ __END__
       <p class="created_at"><%= song[:played_at].strftime("%I:%M%p on %Y.%m.%d") %></p>
     </div>
   <% end %>
+  <ul>
+    <li>
+      <a href="/playlist">Last 10 Tracks</a>
+    </li>
+    <li>
+      <a href="/128"><span>Play</span> 128k</a>
+    </li>
+    <li>
+      <a href="/56"><span>Play</span> 56k</a>
+    </li>
+  </ul>
   <p>
     <a href="http://kalx.berkeley.edu/">kalx.berkeley.edu</a>
   </p>
