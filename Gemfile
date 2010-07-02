@@ -2,7 +2,6 @@ source :gemcutter
 
 gem 'haml'
 gem 'sinatra'
-gem 'uri'
 gem 'nokogiri', '1.4.2'
 gem 'sequel',   '3.13.0'
 
