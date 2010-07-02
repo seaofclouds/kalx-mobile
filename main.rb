@@ -75,12 +75,12 @@ __END__
         color:#fff
       }
       h1 {
-        font-size:117px;
+        font-size:108px;
         margin-bottom:9px;
         color:#333
       }
       h2 {
-        font-size:36px;
+        font-size:32px;
         color:#555;
         text-transform:uppercase;
         padding-bottom:18px;
