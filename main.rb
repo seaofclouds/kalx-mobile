@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'sinatra'
 require 'sequel'
+require 'uri'
 
 configure do
   DB = Sequel.connect(ENV['DATABASE_URL'] || 'sqlite://kalx.db')
@@ -94,6 +95,7 @@ __END__
         color:#555;
         margin:0;
         padding:0;
+        font-weight:normal;
       }
       a {
         color:#555;
@@ -105,17 +107,20 @@ __END__
       h1 a {
         color:#444
       }
+      .micbreak {
+        opacity:.5
+      }
       .track {
         background-color:#303030;
         text-align:left;
         padding:9px;
         margin-bottom:9px;
       }
-      .track h3 {
+      .track h3, .track h3 a {
         color:#fff;
         padding-bottom:4px;
       }
-      .track p {
+      .track p, .track p a {
         color:#999;
       }
       .track p strong {
@@ -124,8 +129,8 @@ __END__
         width:60px;
       }
       .track .created_at {
-        font-size:13px;
         padding-top:4px;
+        color:#777
       }
       .odd {
         background-color:#393939
@@ -143,13 +148,21 @@ __END__
 
 @@ index
   <% @songs.each do |song| %>
-    <div class="track odd">
-      <h3><%= song[:title] %></h3>
-      <p><strong>Artist:</strong> <%= song[:artist] %><p>
-      <p><strong>Album:</strong> <%= song[:album] %><p>
-      <p><strong>Label:</strong> <%= song[:label] %><p>
-      <p class="created_at"><%= song[:played_at].strftime("%I:%M%p on %Y.%m.%d") %></p>
-    </div>
+    <% if song[:title] == 'mic Break' %>
+      <div class="track micbreak">
+        <h3><%= song[:title] %></h3>
+        <p><%= song[:artist] %><p>
+        <p class="created_at"><strong><%= song[:played_at].strftime("%I:%M%p") %></strong> on <%= song[:played_at].strftime("%Y.%m.%d") %></p>
+      </div>
+    <% else %>
+      <div class="track">
+        <h3><a href="http://ax.search.itunes.apple.com/WebObjects/MZSearch.woa/wa/advancedSearch?completeTitle=<%= URI.encode(song[:title]) %>&genreIndex=1&media=music"><%= song[:title] %></a><h3>
+        <p><strong>Artist:</strong> <a href="http://ax.search.itunes.apple.com/WebObjects/MZSearch.woa/wa/advancedSearch?allArtistNames=<%= URI.encode(song[:artist]) %>&genreIndex=1&media=music"><%= song[:artist] %></a><p>
+        <p><strong>Album:</strong> <a href="http://ax.search.itunes.apple.com/WebObjects/MZSearch.woa/wa/advancedSearch?albumTerm=<%= URI.encode(song[:album]) %>&genreIndex=1&media=music"><%= song[:album] %></a><p>
+        <p><strong>Label:</strong> <%= song[:label] %><p>
+        <p class="created_at"><strong><%= song[:played_at].strftime("%I:%M%p") %></strong> on <%= song[:played_at].strftime("%Y.%m.%d") %></p>
+      </div>
+    <% end %>
   <% end %>
   <ul>
     <li>
@@ -169,13 +182,21 @@ __END__
 @@ playlist
   <h2>Last <%= params[:limit] %> Tracks</h2>
   <% @songs.each do |song| %>
-    <div class="track">
-      <h3><%= song[:title] %></h3>
-      <p><strong>Artist:</strong> <%= song[:artist] %><p>
-      <p><strong>Album:</strong> <%= song[:album] %><p>
-      <p><strong>Label:</strong> <%= song[:label] %><p>
-      <p class="created_at"><%= song[:played_at].strftime("%I:%M%p on %Y.%m.%d") %></p>
-    </div>
+    <% if song[:title] == 'mic Break' %>
+      <div class="track micbreak">
+        <h3><%= song[:title] %></h3>
+        <p><%= song[:artist] %><p>
+        <p class="created_at"><strong><%= song[:played_at].strftime("%I:%M%p") %></strong> on <%= song[:played_at].strftime("%Y.%m.%d") %></p>
+      </div>
+    <% else %>
+      <div class="track">
+        <h3><a href="http://ax.search.itunes.apple.com/WebObjects/MZSearch.woa/wa/advancedSearch?completeTitle=<%= URI.encode(song[:title]) %>&genreIndex=1&media=music"><%= song[:title] %></a><h3>
+        <p><strong>Artist:</strong> <a href="http://ax.search.itunes.apple.com/WebObjects/MZSearch.woa/wa/advancedSearch?allArtistNames=<%= URI.encode(song[:artist]) %>&genreIndex=1&media=music"><%= song[:artist] %></a><p>
+        <p><strong>Album:</strong> <a href="http://ax.search.itunes.apple.com/WebObjects/MZSearch.woa/wa/advancedSearch?albumTerm=<%= URI.encode(song[:album]) %>&genreIndex=1&media=music"><%= song[:album] %></a><p>
+        <p><strong>Label:</strong> <%= song[:label] %><p>
+        <p class="created_at"><strong><%= song[:played_at].strftime("%I:%M%p") %></strong> on <%= song[:played_at].strftime("%Y.%m.%d") %></p>
+      </div>
+    <% end %>
   <% end %>
-  <p><small>Cached every 10 min</small></p>
+  <p><small>Cached every 10min</small></p>
   <p>&nbsp;</p>
